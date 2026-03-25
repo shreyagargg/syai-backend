@@ -1,4 +1,4 @@
-import admin from 'firebase-admin';
+import admin from "../config/firebase.js"; 
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -17,4 +17,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+export default authMiddleware;
