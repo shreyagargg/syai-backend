@@ -1,5 +1,5 @@
 // Logic for getting protected data
-exports.getProtectedData = (req, res) => {
+export const is_user = (req, res) => {
   res.json({
     message: "Protected data accessed",
     uid: req.user.uid,
@@ -8,6 +8,6 @@ exports.getProtectedData = (req, res) => {
 };
 
 // Logic for public data
-exports.getPublicData = (req, res) => {
+export const getPublicData = (req, res) => {
   res.json({ message: "This is public data" });
 };

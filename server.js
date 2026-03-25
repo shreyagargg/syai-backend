@@ -1,9 +1,8 @@
-require("dotenv").config();
+import 'dotenv/config';
+import {app} from "./src/app.js";
+import { testDB } from './src/config/db.js';
 
-const app = require("./src/app");
-const { testDB } = require("./src/config/db");
-
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // start server
 app.listen(PORT, () => {

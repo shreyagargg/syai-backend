@@ -5,5 +5,26 @@
     "express": "^5.2.1",
     "firebase-admin": "^13.7.0",
     "pg": "^8.20.0"
-  }
+  },
+  "name": "syai-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreyagargg/syai-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shreyagargg/syai-backend/issues"
+  },
+  "homepage": "https://github.com/shreyagargg/syai-backend#readme"
 }
