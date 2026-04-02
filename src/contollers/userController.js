@@ -15,3 +15,7 @@ export const is_user = (req, res) => {
 export const getPublicData = (req, res) => {
   res.json({ message: "This is public data" });
 };
+
+export const User = (req, res) => {
+  console.log("working")
+}

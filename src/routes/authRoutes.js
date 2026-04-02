@@ -1,9 +1,9 @@
 import express from "express";
-import { is_user } from "../contollers/userController.js";
+import { User } from "../contollers/userController.js";
 import authMiddleware from "../middleware/auth.js";
 
-const UserRouter = express.Router();
+const AuthRouter = express.Router();
 
-UserRouter.get("/is_user", authMiddleware, is_user);
+AuthRouter.post("/sync", authMiddleware, User);
 
-export default UserRouter;
+export default AuthRouter;
