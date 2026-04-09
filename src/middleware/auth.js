@@ -8,7 +8,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const idToken = header.split(" ")[1];
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const decodedToken = await admin.auth().verifyIdToken(idToken, true);
     
     req.user = decodedToken;
     next();
