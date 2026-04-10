@@ -1,5 +1,6 @@
 import { pool } from "../config/db.js";
 
+const CreateUser = async (req, res) => {
 const existingUser = await pool.query(
     'SELECT * FROM users WHERE email = $1 OR firebase_uid = $2',
     [email, firebase_uid]
@@ -21,6 +22,7 @@ if (existingUser.rowCount > 0) {
     }
 
     return res.status(400).json({ message: "User already exists" });
+}
 }
 
 const UpdateUser = async (req, res) => {

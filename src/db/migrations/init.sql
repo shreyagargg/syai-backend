@@ -40,23 +40,25 @@ CREATE TABLE user_profiles (
 );
 
 CREATE TABLE subscriptions (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    id SERIAL PRIMARY KEY,
+      user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
 
-  plan_type TEXT CHECK (plan_type IN ('free', 'premium', 'pro')),
-  status TEXT CHECK (status IN ('active', 'expired', 'cancelled')),
+        plan_type TEXT CHECK (plan_type IN ('free', 'premium', 'pro')),
+          status TEXT CHECK (status IN ('active', 'expired', 'cancelled')),
 
-  start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  end_date TIMESTAMP,
+            start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+              end_date TIMESTAMP,
 
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                  );
 
-CREATE INDEX idx_user_subscriptions 
-ON subscriptions(user_id, status);
+                  CREATE INDEX idx_user_subscriptions 
+                  ON subscriptions(user_id, status);
 
--- Only ONE active subscription per user
-CREATE UNIQUE INDEX unique_active_subscription
-ON subscriptions(user_id)
-WHERE status = 'active';
+                  -- Only ONE active subscription per user
+                  CREATE UNIQUE INDEX unique_active_subscription
+                  ON subscriptions(user_id)
+                  WHERE status = 'active';
+                  
+)
