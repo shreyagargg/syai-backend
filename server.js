@@ -1,5 +1,7 @@
 import {app} from "./src/app.js";
 import { testDB } from './src/config/db.js';
+import cloudinary from './src/config/cloudinary.js';
+
 
 const PORT = process.env.PORT;
 
