@@ -10,12 +10,8 @@ app.use(express.json());
 app.use("/api/v1/users", UserRouter);
 app.use("/api/v1/users", UserProfileRouter);
 
-
-
 app.get("/", (req, res) => {
   res.send("SSSSSyyyyyyyyyAAAAAAAAAAiiiiii!");
 })
-
-// app.use("/api/v1/auth", AuthRouter)
 
 export { app };
