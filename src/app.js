@@ -3,12 +3,14 @@ import express from 'express';
 import cors from 'cors';
 import UserProfileRouter from './routes/profileRoutes.js';
 import UserRouter from "./routes/UserRouter.js";
+import ImageRouter from './routes/imageRoutes.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/v1/users", UserRouter);
 app.use("/api/v1/users", UserProfileRouter);
+app.use("api/v1/images", ImageRouter)
 
 app.get("/", (req, res) => {
   res.send("SSSSSyyyyyyyyyAAAAAAAAAAiiiiii!");
