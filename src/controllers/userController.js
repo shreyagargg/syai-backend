@@ -1,29 +1,58 @@
 import { pool } from "../config/db.js";
 
+// import { pool } from "../config/db.js";
+
 const CreateUser = async (req, res) => {
-const existingUser = await pool.query(
-    'SELECT * FROM users WHERE email = $1 OR firebase_uid = $2',
-    [email, firebase_uid]
-);
+    const firebase_uid = req.user.uid;
+    const email = req.user.email;
 
-if (existingUser.rowCount > 0) {
-    const user = existingUser.rows[0];
-
-    if (user.is_deleted) {
-        // 🔥 restore user
-        await pool.query(
-            `UPDATE users 
-             SET is_deleted = FALSE, deleted_at = NULL, updated_at = CURRENT_TIMESTAMP 
-             WHERE firebase_uid = $1`,
-            [firebase_uid]
+    try {
+        const existingUser = await pool.query(
+            'SELECT * FROM users WHERE email = $1 OR firebase_uid = $2',
+            [email, firebase_uid]
         );
 
-        return res.status(200).json({ message: "User restored successfully" });
-    }
+        if (existingUser.rowCount > 0) {
+            const user = existingUser.rows[0];
 
-    return res.status(400).json({ message: "User already exists" });
-}
-}
+            if (user.is_deleted) {
+                await pool.query(
+                    `UPDATE users
+                     SET is_deleted = FALSE,
+                         deleted_at = NULL,
+                         updated_at = CURRENT_TIMESTAMP
+                     WHERE firebase_uid = $1`,
+                    [firebase_uid]
+                );
+
+                return res.status(200).json({
+                    message: "User restored successfully"
+                });
+            }
+
+            return res.status(200).json({
+                message: "User already exists"
+            });
+        }
+
+        await pool.query(
+            `INSERT INTO users (firebase_uid, email)
+             VALUES ($1, $2)`,
+            [firebase_uid, email]
+        );
+
+        res.status(201).json({
+            message: "User created successfully"
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        });
+    }
+};
+
+// export { CreateUser };
 
 const UpdateUser = async (req, res) => {
     const { email } = req.body;
